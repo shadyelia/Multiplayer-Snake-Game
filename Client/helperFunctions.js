@@ -2,7 +2,7 @@ function getRandomColour(tokenColours) {
     let colour = generateColor();
 
     while (tokenColours.indexOf(colour) >= 0) {
-        colour = generateColor();
+        colour = generateColour();
     }
 
     return colour;
@@ -16,3 +16,5 @@ function generateColour() {
     }
     return colour
 }
+
+
