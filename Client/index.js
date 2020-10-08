@@ -11,6 +11,9 @@ const joinGameBtn = document.getElementById('joinGameButton');
 const gameCodeInput = document.getElementById('gameCodeInput');
 const gameCodeDisplay = document.getElementById('gameCodeDisplay');
 
+const playerOneScore = document.getElementById('playerOneScore');
+const playerTwoScore = document.getElementById('playerTwoScore');
+
 newGameBtn.addEventListener('click', newGame);
 joinGameBtn.addEventListener('click', joinGame);
 
@@ -79,20 +82,22 @@ function paintGame(state) {
     ctx.fillStyle = _backgroundColor;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    const food = state.food;
-    const gridsize = state.gridsize;
-    const size = canvas.width / gridsize;
+    let food = state.food;
+    let gridsize = state.gridsize;
+    let size = canvas.width / gridsize;
 
     ctx.fillStyle = _foodColour;
     ctx.fillRect(food.x * size, food.y * size, size, size);
 
     paintPlayer(state.players[0], size, _snakeColour);
-    ;
+    playerOneScore.innerHTML = state.players[0].score;
+
     paintPlayer(state.players[1], size, _snakeTwoColour);
+    playerTwoScore.innerHTML = state.players[1].score;
 }
 
 function paintPlayer(playerState, size, colour) {
-    const snake = playerState.snake;
+    let snake = playerState.snake;
 
     ctx.fillStyle = colour;
     for (let cell of snake) {
