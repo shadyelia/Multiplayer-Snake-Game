@@ -1,0 +1,17 @@
+#fruit, #virus {
+    display: none;
+}
+
+#gameScreen {
+    display: none;
+}
+
+#fruit, #virus {
+    display: none;
+}
+
+canvas {
+    background-image: url(./assets/green.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}

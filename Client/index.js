@@ -1,7 +1,8 @@
-const _backgroundColor = '#231f20';
+let _backgroundColor = 'green';
+let _foodColour = 'red';
 let _snakeColour = '#c2c2c2';
-let _foodColour = '#e66916';
 let _snakeTwoColour = "red";
+
 const socket = io('http://localhost:3000');
 
 const gameScreen = document.getElementById('gameScreen');
@@ -13,6 +14,9 @@ const gameCodeDisplay = document.getElementById('gameCodeDisplay');
 
 const playerOneScore = document.getElementById('playerOneScore');
 const playerTwoScore = document.getElementById('playerTwoScore');
+
+var fruit = document.getElementById("fruit");
+
 
 newGameBtn.addEventListener('click', newGame);
 joinGameBtn.addEventListener('click', joinGame);
@@ -65,7 +69,7 @@ function init() {
     canvas = document.getElementById('canvas');
     ctx = canvas.getContext('2d');
 
-    canvas.width = canvas.height = 600;
+    canvas.width = canvas.height = 690;
 
     ctx.fillStyle = _backgroundColor;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -86,14 +90,16 @@ function paintGame(state) {
     let gridsize = state.gridsize;
     let size = canvas.width / gridsize;
 
-    ctx.fillStyle = _foodColour;
-    ctx.fillRect(food.x * size, food.y * size, size, size);
+    ctx.drawImage(fruit, food.x * size, food.y * size, size, size);
+
+    //ctx.fillStyle = _foodColour;
+    //ctx.fillRect(food.x * size, food.y * size, size, size);
 
     paintPlayer(state.players[0], size, _snakeColour);
-    playerOneScore.innerHTML = state.players[0].score;
+    playerOneScore.innerHTML = "Player one score : " + String(state.players[0].score);
 
     paintPlayer(state.players[1], size, _snakeTwoColour);
-    playerTwoScore.innerHTML = state.players[1].score;
+    playerTwoScore.innerHTML = "Player one score : " + String(state.players[1].score);
 }
 
 function paintPlayer(playerState, size, colour) {
