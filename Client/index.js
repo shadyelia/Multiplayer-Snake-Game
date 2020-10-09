@@ -3,7 +3,8 @@ let _foodColour = 'red';
 let _snakeColour = '#c2c2c2';
 let _snakeTwoColour = "red";
 
-const socket = io('http://localhost:3000');
+//const socket = io('http://localhost:3000');
+const socket = io('https://snake-multiple.herokuapp.com/');
 
 const gameScreen = document.getElementById('gameScreen');
 const initialScreen = document.getElementById('initialScreen');
@@ -15,7 +16,8 @@ const gameCodeDisplay = document.getElementById('gameCodeDisplay');
 const playerOneScore = document.getElementById('playerOneScore');
 const playerTwoScore = document.getElementById('playerTwoScore');
 
-var fruit = document.getElementById("fruit");
+const fruit = document.getElementById("fruit");
+const virus = document.getElementById("virus");
 
 
 newGameBtn.addEventListener('click', newGame);
@@ -69,10 +71,10 @@ function init() {
     canvas = document.getElementById('canvas');
     ctx = canvas.getContext('2d');
 
-    canvas.width = canvas.height = 690;
+    // canvas.width = canvas.height = 600;
 
-    ctx.fillStyle = _backgroundColor;
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    // ctx.fillStyle = _backgroundColor;
+    // ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     document.addEventListener('keydown', keydown);
     gameActive = true;
@@ -87,10 +89,12 @@ function paintGame(state) {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     let food = state.food;
+    let vir = state.virus;
     let gridsize = state.gridsize;
     let size = canvas.width / gridsize;
 
     ctx.drawImage(fruit, food.x * size, food.y * size, size, size);
+    ctx.drawImage(virus, vir.x * size, vir.y * size, size, size);
 
     //ctx.fillStyle = _foodColour;
     //ctx.fillRect(food.x * size, food.y * size, size, size);
@@ -99,7 +103,7 @@ function paintGame(state) {
     playerOneScore.innerHTML = "Player one score : " + String(state.players[0].score);
 
     paintPlayer(state.players[1], size, _snakeTwoColour);
-    playerTwoScore.innerHTML = "Player one score : " + String(state.players[1].score);
+    playerTwoScore.innerHTML = "Player two score : " + String(state.players[1].score);
 }
 
 function paintPlayer(playerState, size, colour) {

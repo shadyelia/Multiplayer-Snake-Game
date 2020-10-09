@@ -47,6 +47,7 @@ function createGameState() {
             score: 0
         }],
         food: {},
+        virus: {},
         gridsize: GRID_SIZE,
     };
 }
@@ -79,6 +80,7 @@ function gameLoop(state) {
         playerOne.pos.y += playerOne.vel.y;
         playerOne.score += 1;
         randomFood(state);
+        randomVirus(state);
     }
 
     if (state.food.x === playerTwo.pos.x && state.food.y === playerTwo.pos.y) {
@@ -87,6 +89,28 @@ function gameLoop(state) {
         playerTwo.pos.y += playerTwo.vel.y;
         playerTwo.score += 1;
         randomFood(state);
+        randomVirus(state);
+
+    }
+
+
+    if (state.virus.x === playerOne.pos.x && state.virus.y === playerOne.pos.y) {
+        playerOne.snake.push({ ...playerOne.pos });
+        playerOne.pos.x -= playerOne.vel.x;
+        playerOne.pos.y -= playerOne.vel.y;
+        playerOne.score -= 1;
+        randomFood(state);
+        randomVirus(state);
+
+    }
+
+    if (state.virus.x === playerTwo.pos.x && state.virus.y === playerTwo.pos.y) {
+        playerTwo.snake.push({ ...playerTwo.pos });
+        playerTwo.pos.x -= playerTwo.vel.x;
+        playerTwo.pos.y -= playerTwo.vel.y;
+        playerTwo.score -= 1;
+        randomFood(state);
+        randomVirus(state);
     }
 
     if (playerOne.vel.x || playerOne.vel.y) {
@@ -133,6 +157,32 @@ function randomFood(state) {
     }
 
     state.food = food;
+}
+
+function randomVirus(state) {
+    virus = {
+        x: Math.floor(Math.random() * GRID_SIZE),
+        y: Math.floor(Math.random() * GRID_SIZE),
+    }
+
+    if (virus.x != state.food.x && virus.y != state.food.y) {
+        for (let cell of state.players[0].snake) {
+            if (cell.x === virus.x && cell.y === virus.y) {
+                return randomFood(state);
+            }
+        }
+
+        for (let cell of state.players[1].snake) {
+            if (cell.x === virus.x && cell.y === virus.y) {
+                return randomFood(state);
+            }
+        }
+    }
+    else {
+        randomVirus(state);
+    }
+
+    state.virus = virus;
 }
 
 function getUpdatedVelocity(keyCode) {
