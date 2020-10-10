@@ -1,38 +1,40 @@
-<div class="container h-100">
+<body>
+    <div class="container content h-100">
 
-    <div id="initialScreen" class="h-100">
-        <div class="d-flex flex-column align-items-center justify-content-center h-100">
-            <h1>Multiplayer Snake</h1>
-            <button type="submit" class="btn btn-success" id="newGameButton">
-                Create New Game
-            </button>
-            <div>OR</div>
-            <div class="form-group">
-                <input type="text" placeholder="Enter Game Code" id="gameCodeInput" />
+        <div id="initialScreen" class="h-100" *ngIf="!gameStarted">
+            <div class="d-flex flex-column align-items-center justify-content-center h-100">
+                <h1>Multiplayer Snake</h1>
+                <button type="submit" class="btn btn-success" (click)="createGame()" id="newGameButton">
+                    Create New Game
+                </button>
+                <div>OR</div>
+                <div class="form-group">
+                    <input type="text" placeholder="Enter Game Code" id="gameCodeInput" />
+                </div>
+                <button type="submit" class="btn btn-success" id="joinGameButton">
+                    Join Game
+                </button>
             </div>
-            <button type="submit" class="btn btn-success" id="joinGameButton">
-                Join Game
-            </button>
         </div>
-    </div>
 
-    <div id="gameScreen" class="h-100">
-        <div class="d-flex flex-column align-items-center justify-content-center h-100">
+        <div id="gameScreen" class="h-100" *ngIf="gameStarted">
+            <div class="d-flex flex-column align-items-center justify-content-center h-100">
 
-            <h1>Your game code is: <span id="gameCodeDisplay"></span></h1>
+                <h1>Your game code is: <span id="gameCodeDisplay"></span></h1>
 
-            <div class="row">
-                <h2 class="col-6" id="playerOneScore"> Player one score : 0 </h2>
-                <h2 class="col-6" id="playerTwoScore"> Player two score : 0 </h2>
+                <div class="row">
+                    <h2 class="col-6" id="playerOneScore"> Player one score : 0 </h2>
+                    <h2 class="col-6" id="playerTwoScore"> Player two score : 0 </h2>
 
 
-                <canvas id="canvas" width="600" height="600"></canvas>
+                    <canvas id="canvas" width="600" height="600"></canvas>
 
-                <img id="fruit" src="assets/apple.png" alt="fruit">
-                <img id="virus" src="assets/virus.png" alt="virus">
+                    <img id="fruit" src="assets/apple.png" alt="fruit">
+                    <img id="virus" src="assets/virus.png" alt="virus">
+                </div>
+
             </div>
-
         </div>
-    </div>
 
-</div>
+    </div>
+</body>

@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainScreenComponent implements OnInit {
 
+  gameStarted: boolean = false;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  createGame() {
+    this.gameStarted = true;
   }
 
 }

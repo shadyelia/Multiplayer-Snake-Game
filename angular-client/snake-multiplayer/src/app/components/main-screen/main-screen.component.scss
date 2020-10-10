@@ -1,4 +1,4 @@
-#fruit, #virus, #gameScreen, #fruit, #virus {
+#fruit, #virus {
     display: none;
   }
   
@@ -6,4 +6,11 @@
     background-image: url("../../../assets/green.jpg");
     background-repeat: no-repeat;
     background-size: cover;
+  }
+
+  .content {
+    max-width: 500px;
+    margin: auto;
+    background: white;
+    padding: 10px;
   }
